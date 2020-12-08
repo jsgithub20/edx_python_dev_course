@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module weather</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>weather</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/nbuser/library/command_line/weather.py">/home/nbuser/library/command_line/weather.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;[&nbsp;]&nbsp;In&nbsp;this&nbsp;project,&nbsp;you&nbsp;will&nbsp;read&nbsp;a&nbsp;CSV&nbsp;file&nbsp;containing&nbsp;about&nbsp;25K&nbsp;lines&nbsp;of&nbsp;weather&nbsp;information&nbsp;<br>
+#&nbsp;and&nbsp;store&nbsp;the&nbsp;information&nbsp;in&nbsp;a&nbsp;Python&nbsp;dictionary.&nbsp;You&nbsp;will&nbsp;then&nbsp;use&nbsp;the&nbsp;dictionary&nbsp;to&nbsp;find&nbsp;out<br>
+#&nbsp;the&nbsp;hottest,&nbsp;coldest,&nbsp;rainiest&nbsp;years&nbsp;and&nbsp;so&nbsp;on...<br>
+#&nbsp;You&nbsp;will&nbsp;see&nbsp;that&nbsp;the&nbsp;dictionary's&nbsp;search&nbsp;optimization&nbsp;algorithms&nbsp;will&nbsp;allow&nbsp;you&nbsp;to&nbsp;explore&nbsp;<br>
+#&nbsp;this&nbsp;large&nbsp;dataset&nbsp;without&nbsp;any&nbsp;noticeable&nbsp;delays.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-add_rainy"><strong>add_rainy</strong></a>(weather)</dt><dd><tt>Emphasize&nbsp;rainy&nbsp;days&nbsp;using&nbsp;Boolean&nbsp;values.<br>
+&nbsp;<br>
+Modify&nbsp;the&nbsp;weather&nbsp;dictionary&nbsp;by&nbsp;adding&nbsp;another&nbsp;Boolean&nbsp;element&nbsp;to&nbsp;the&nbsp;values'&nbsp;lists.&nbsp;<br>
+If&nbsp;precipitation&nbsp;is&nbsp;observed&nbsp;on&nbsp;a&nbsp;day&nbsp;(more&nbsp;than&nbsp;0"),&nbsp;the&nbsp;associated&nbsp;list&nbsp;is&nbsp;appended&nbsp;by&nbsp;True.<br>
+If&nbsp;precipitation&nbsp;is&nbsp;not&nbsp;observed&nbsp;(0"),&nbsp;the&nbsp;associated&nbsp;list&nbsp;is&nbsp;appended&nbsp;by&nbsp;False.<br>
+&nbsp;<br>
+args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;weather:&nbsp;dictionary,&nbsp;keys&nbsp;are&nbsp;date&nbsp;objects&nbsp;and&nbsp;values&nbsp;are&nbsp;lists&nbsp;[TMAX,&nbsp;TMIN,&nbsp;PRCP]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;None:&nbsp;the&nbsp;weather&nbsp;dictionary&nbsp;is&nbsp;modified&nbsp;directly,&nbsp;keys&nbsp;are&nbsp;date&nbsp;objects&nbsp;and&nbsp;values&nbsp;are&nbsp;lists&nbsp;[TMAX,&nbsp;TMIN,&nbsp;PRCP,&nbsp;RAINY_DAY]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+examples:<br>
+Input&nbsp;weather&nbsp;dictionary:<br>
+{datetime.date(2017,&nbsp;12,&nbsp;10):&nbsp;[49,&nbsp;34,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;11):&nbsp;[49,&nbsp;29,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;12):&nbsp;[46,&nbsp;32,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;13):&nbsp;[48,&nbsp;34,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;14):&nbsp;[50,&nbsp;36,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;15):&nbsp;[43,&nbsp;37,&nbsp;0.06],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;16):&nbsp;[45,&nbsp;37,&nbsp;0.14],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;17):&nbsp;[50,&nbsp;42,&nbsp;0.03],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;18):&nbsp;[49,&nbsp;41,&nbsp;0.7],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;19):&nbsp;[50,&nbsp;40,&nbsp;1.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;20):&nbsp;[49,&nbsp;32,&nbsp;0.13],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;21):&nbsp;[41,&nbsp;29,&nbsp;0.01],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;22):&nbsp;[40,&nbsp;35,&nbsp;0.09],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;23):&nbsp;[38,&nbsp;29,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;24):&nbsp;[38,&nbsp;28,&nbsp;0.12]}<br>
+&nbsp;<br>
+Updated&nbsp;weather&nbsp;dictionary&nbsp;with&nbsp;Boolean&nbsp;values<br>
+{datetime.date(2017,&nbsp;12,&nbsp;10):&nbsp;[49,&nbsp;34,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;11):&nbsp;[49,&nbsp;29,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;12):&nbsp;[46,&nbsp;32,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;13):&nbsp;[48,&nbsp;34,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;14):&nbsp;[50,&nbsp;36,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;15):&nbsp;[43,&nbsp;37,&nbsp;0.06,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;16):&nbsp;[45,&nbsp;37,&nbsp;0.14,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;17):&nbsp;[50,&nbsp;42,&nbsp;0.03,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;18):&nbsp;[49,&nbsp;41,&nbsp;0.7,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;19):&nbsp;[50,&nbsp;40,&nbsp;1.0,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;20):&nbsp;[49,&nbsp;32,&nbsp;0.13,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;21):&nbsp;[41,&nbsp;29,&nbsp;0.01,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;22):&nbsp;[40,&nbsp;35,&nbsp;0.09,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;23):&nbsp;[38,&nbsp;29,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;24):&nbsp;[38,&nbsp;28,&nbsp;0.12,&nbsp;True]}</tt></dd></dl>
+ <dl><dt><a name="-coldest"><strong>coldest</strong></a>(yearly_weather)</dt><dd><tt>Find&nbsp;the&nbsp;coldest&nbsp;year&nbsp;in&nbsp;yearly_weather.<br>
+&nbsp;<br>
+Look&nbsp;through&nbsp;all&nbsp;the&nbsp;years&nbsp;in&nbsp;the&nbsp;yearly_weather&nbsp;dictionary&nbsp;and&nbsp;return&nbsp;the&nbsp;year&nbsp;with&nbsp;<br>
+the&nbsp;lowest&nbsp;average&nbsp;minimum&nbsp;temperature&nbsp;(lowest&nbsp;AVG_TMIN)<br>
+&nbsp;<br>
+args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;yearly_weather:&nbsp;consolidated&nbsp;dictionary,&nbsp;keys&nbsp;are&nbsp;years&nbsp;(int),&nbsp;values&nbsp;are&nbsp;lists&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[AVG_TMAX,&nbsp;AVG_TMIN,&nbsp;TOTAL_PRCP,&nbsp;TOTAL_RAINY_DAYS,&nbsp;TOTAL_DAYS]&nbsp;<br>
+&nbsp;<br>
+returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;coldest_year:&nbsp;the&nbsp;year&nbsp;with&nbsp;the&nbsp;lowest&nbsp;minimum&nbsp;temperature&nbsp;average&nbsp;(AVG_TMIN)</tt></dd></dl>
+ <dl><dt><a name="-consolidate"><strong>consolidate</strong></a>(weather)</dt><dd><tt>Consolidate&nbsp;the&nbsp;daily&nbsp;weather&nbsp;information&nbsp;by&nbsp;year.<br>
+&nbsp;<br>
+Use&nbsp;the&nbsp;weather&nbsp;dictionary&nbsp;to&nbsp;generate&nbsp;a&nbsp;new&nbsp;consolidated&nbsp;dictionary&nbsp;(yearly_weather).&nbsp;<br>
+The&nbsp;new&nbsp;dictionary&nbsp;uses&nbsp;years&nbsp;as&nbsp;keys,&nbsp;and&nbsp;the&nbsp;associated&nbsp;values&nbsp;are&nbsp;lists&nbsp;containing&nbsp;(in&nbsp;order):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1)&nbsp;The&nbsp;average&nbsp;of&nbsp;the&nbsp;highest&nbsp;recorded&nbsp;temperatures&nbsp;in&nbsp;the&nbsp;year&nbsp;(AVG_TMAX)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2)&nbsp;The&nbsp;average&nbsp;of&nbsp;the&nbsp;lowest&nbsp;recorded&nbsp;temperatures&nbsp;in&nbsp;the&nbsp;year&nbsp;(AVG_TMIN)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;3)&nbsp;The&nbsp;total&nbsp;recorded&nbsp;precipitation&nbsp;in&nbsp;the&nbsp;year&nbsp;(TOTAL_PRCP)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4)&nbsp;The&nbsp;total&nbsp;number&nbsp;of&nbsp;rainy&nbsp;days&nbsp;in&nbsp;the&nbsp;year&nbsp;(TOTAL_RAINY_DAYS)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;5)&nbsp;The&nbsp;number&nbsp;of&nbsp;recorded&nbsp;days&nbsp;(TOTAL_DAYS).&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;element&nbsp;is&nbsp;necessary&nbsp;to&nbsp;account&nbsp;for&nbsp;days&nbsp;where&nbsp;the&nbsp;station&nbsp;breaks&nbsp;(missing&nbsp;recordings),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;if&nbsp;the&nbsp;year&nbsp;hasn't&nbsp;finished&nbsp;yet.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+args:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;weather:&nbsp;dictionary,&nbsp;keys&nbsp;are&nbsp;date&nbsp;objects&nbsp;and&nbsp;values&nbsp;are&nbsp;lists&nbsp;[TMAX,&nbsp;TMIN,&nbsp;PRCP,&nbsp;RAINY_DAY]<br>
+&nbsp;<br>
+returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;yearly_weather:&nbsp;consolidated&nbsp;dictionary,&nbsp;keys&nbsp;are&nbsp;years&nbsp;(int),&nbsp;values&nbsp;are&nbsp;lists&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[AVG_TMAX,&nbsp;AVG_TMIN,&nbsp;TOTAL_PRCP,&nbsp;TOTAL_RAINY_DAYS,&nbsp;TOTAL_DAYS]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+examples:<br>
+Input&nbsp;weather&nbsp;dictionary:<br>
+{datetime.date(2017,&nbsp;12,&nbsp;10):&nbsp;[49,&nbsp;34,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;11):&nbsp;[49,&nbsp;29,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;12):&nbsp;[46,&nbsp;32,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;13):&nbsp;[48,&nbsp;34,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;14):&nbsp;[50,&nbsp;36,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;15):&nbsp;[43,&nbsp;37,&nbsp;0.06,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;16):&nbsp;[45,&nbsp;37,&nbsp;0.14,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;17):&nbsp;[50,&nbsp;42,&nbsp;0.03,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;18):&nbsp;[49,&nbsp;41,&nbsp;0.7,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;19):&nbsp;[50,&nbsp;40,&nbsp;1.0,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;20):&nbsp;[49,&nbsp;32,&nbsp;0.13,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;21):&nbsp;[41,&nbsp;29,&nbsp;0.01,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;22):&nbsp;[40,&nbsp;35,&nbsp;0.09,&nbsp;True],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;23):&nbsp;[38,&nbsp;29,&nbsp;0.0,&nbsp;False],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;24):&nbsp;[38,&nbsp;28,&nbsp;0.12,&nbsp;True]}<br>
+&nbsp;<br>
+&nbsp;Output&nbsp;yearly_weather&nbsp;dictionary:<br>
+&nbsp;{2017:&nbsp;[45.666666666666664,&nbsp;34.333333333333336,&nbsp;2.28,&nbsp;9,&nbsp;15]}</tt></dd></dl>
+ <dl><dt><a name="-convert_file"><strong>convert_file</strong></a>(file_path)</dt><dd><tt>Convert&nbsp;CSV&nbsp;file&nbsp;to&nbsp;a&nbsp;Python&nbsp;dictionary.<br>
+&nbsp;<br>
+The&nbsp;CSV&nbsp;file&nbsp;contains&nbsp;daily&nbsp;weather&nbsp;information&nbsp;arranged&nbsp;in&nbsp;rows,<br>
+the&nbsp;rows&nbsp;contain&nbsp;&nbsp;(date,&nbsp;precipitation&nbsp;(inches),&nbsp;maximum&nbsp;temperature&nbsp;(F),&nbsp;minimum&nbsp;temperature&nbsp;(F))&nbsp;in&nbsp;order.<br>
+First&nbsp;line&nbsp;in&nbsp;CSV&nbsp;file&nbsp;is&nbsp;a&nbsp;header&nbsp;(DATE,&nbsp;PRCP,&nbsp;TMAX,&nbsp;TMIN),&nbsp;the&nbsp;rest&nbsp;contain&nbsp;the&nbsp;weather&nbsp;data.<br>
+&nbsp;<br>
+The&nbsp;function&nbsp;should&nbsp;read&nbsp;the&nbsp;data&nbsp;in&nbsp;the&nbsp;file&nbsp;and&nbsp;generate&nbsp;a&nbsp;dictionary&nbsp;where:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1)&nbsp;keys&nbsp;are&nbsp;date&nbsp;objects&nbsp;(from&nbsp;the&nbsp;datetime&nbsp;module),&nbsp;using&nbsp;the&nbsp;daily&nbsp;date&nbsp;info&nbsp;in&nbsp;the&nbsp;file<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2)&nbsp;values&nbsp;are&nbsp;lists&nbsp;containing&nbsp;[TMAX,&nbsp;TMIN,&nbsp;PRCP]&nbsp;in&nbsp;order<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;file_path:&nbsp;path&nbsp;to&nbsp;the&nbsp;CSV&nbsp;file<br>
+&nbsp;<br>
+returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;weather:&nbsp;the&nbsp;generated&nbsp;dictionary&nbsp;using&nbsp;date&nbsp;objects&nbsp;as&nbsp;keys&nbsp;and&nbsp;lists&nbsp;of&nbsp;weather&nbsp;info&nbsp;as&nbsp;values<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+examples:<br>
+Input&nbsp;CSV&nbsp;file:<br>
+DATE,PRCP,TMAX,TMIN<br>
+12/10/2017,0,49,34<br>
+12/11/2017,0,49,29<br>
+12/12/2017,0,46,32<br>
+12/13/2017,0,48,34<br>
+12/14/2017,0,50,36<br>
+12/15/2017,0.06,43,37<br>
+12/16/2017,0.14,45,37<br>
+12/17/2017,0.03,50,42<br>
+12/18/2017,0.7,49,41<br>
+12/19/2017,1,50,40<br>
+12/20/2017,0.13,49,32<br>
+12/21/2017,0.01,41,29<br>
+12/22/2017,0.09,40,35<br>
+12/23/2017,0,38,29<br>
+12/24/2017,0.12,38,28<br>
+&nbsp;<br>
+Output&nbsp;dictionary&nbsp;(weather):<br>
+{datetime.date(2017,&nbsp;12,&nbsp;10):&nbsp;[49,&nbsp;34,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;11):&nbsp;[49,&nbsp;29,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;12):&nbsp;[46,&nbsp;32,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;13):&nbsp;[48,&nbsp;34,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;14):&nbsp;[50,&nbsp;36,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;15):&nbsp;[43,&nbsp;37,&nbsp;0.06],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;16):&nbsp;[45,&nbsp;37,&nbsp;0.14],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;17):&nbsp;[50,&nbsp;42,&nbsp;0.03],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;18):&nbsp;[49,&nbsp;41,&nbsp;0.7],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;19):&nbsp;[50,&nbsp;40,&nbsp;1.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;20):&nbsp;[49,&nbsp;32,&nbsp;0.13],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;21):&nbsp;[41,&nbsp;29,&nbsp;0.01],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;22):&nbsp;[40,&nbsp;35,&nbsp;0.09],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;23):&nbsp;[38,&nbsp;29,&nbsp;0.0],<br>
+&nbsp;datetime.date(2017,&nbsp;12,&nbsp;24):&nbsp;[38,&nbsp;28,&nbsp;0.12]}</tt></dd></dl>
+ <dl><dt><a name="-dashes"><strong>dashes</strong></a>(count)</dt><dd><tt>Print&nbsp;a&nbsp;fancy&nbsp;line&nbsp;of&nbsp;`count`&nbsp;dashes</tt></dd></dl>
+ <dl><dt><a name="-date_creater"><strong>date_creater</strong></a>(date_string)</dt><dd><tt>Convert&nbsp;the&nbsp;date_string&nbsp;(formatted&nbsp;as&nbsp;m/d/yyyy)&nbsp;to&nbsp;a&nbsp;date&nbsp;object.</tt></dd></dl>
+ <dl><dt><a name="-display"><strong>display</strong></a>(title, years, yearly_weather)</dt><dd><tt>Print&nbsp;a&nbsp;page&nbsp;with&nbsp;a&nbsp;header,&nbsp;title,&nbsp;and&nbsp;the&nbsp;weather&nbsp;information&nbsp;of&nbsp;all&nbsp;years&nbsp;as&nbsp;found&nbsp;in&nbsp;yearly_weather</tt></dd></dl>
+ <dl><dt><a name="-highest_prcp"><strong>highest_prcp</strong></a>(yearly_weather)</dt><dd><tt>Find&nbsp;the&nbsp;year&nbsp;with&nbsp;the&nbsp;highest&nbsp;total&nbsp;precipitation&nbsp;in&nbsp;yearly_weather.<br>
+&nbsp;<br>
+Look&nbsp;through&nbsp;all&nbsp;the&nbsp;years&nbsp;in&nbsp;the&nbsp;yearly_weather&nbsp;dictionary&nbsp;and&nbsp;return&nbsp;the&nbsp;year&nbsp;with&nbsp;<br>
+the&nbsp;largest&nbsp;TOTAL_PRCP<br>
+&nbsp;<br>
+args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;yearly_weather:&nbsp;consolidated&nbsp;dictionary,&nbsp;keys&nbsp;are&nbsp;years&nbsp;(int),&nbsp;values&nbsp;are&nbsp;lists&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[AVG_TMAX,&nbsp;AVG_TMIN,&nbsp;TOTAL_PRCP,&nbsp;TOTAL_RAINY_DAYS,&nbsp;TOTAL_DAYS]&nbsp;<br>
+&nbsp;<br>
+returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rainiest_year:&nbsp;the&nbsp;year&nbsp;with&nbsp;the&nbsp;highest&nbsp;total&nbsp;precipitation</tt></dd></dl>
+ <dl><dt><a name="-hottest"><strong>hottest</strong></a>(yearly_weather)</dt><dd><tt>Find&nbsp;the&nbsp;hottest&nbsp;year&nbsp;in&nbsp;yearly_weather.<br>
+&nbsp;<br>
+Look&nbsp;through&nbsp;all&nbsp;the&nbsp;years&nbsp;in&nbsp;the&nbsp;yearly_weather&nbsp;dictionary&nbsp;and&nbsp;return&nbsp;the&nbsp;year&nbsp;with&nbsp;<br>
+the&nbsp;highest&nbsp;average&nbsp;maximum&nbsp;temperature&nbsp;(highest&nbsp;AVG_TMAX)<br>
+&nbsp;<br>
+args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;yearly_weather:&nbsp;consolidated&nbsp;dictionary,&nbsp;keys&nbsp;are&nbsp;years&nbsp;(int),&nbsp;values&nbsp;are&nbsp;lists&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[AVG_TMAX,&nbsp;AVG_TMIN,&nbsp;TOTAL_PRCP,&nbsp;TOTAL_RAINY_DAYS,&nbsp;TOTAL_DAYS]&nbsp;<br>
+&nbsp;<br>
+returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;hottest_year:&nbsp;the&nbsp;year&nbsp;with&nbsp;the&nbsp;highest&nbsp;maximum&nbsp;temperature&nbsp;average&nbsp;(AVG_TMAX)</tt></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>()</dt></dl>
+ <dl><dt><a name="-page_header"><strong>page_header</strong></a>(title)</dt><dd><tt>Print&nbsp;a&nbsp;page&nbsp;header&nbsp;with&nbsp;a&nbsp;title&nbsp;surrounded&nbsp;by&nbsp;dashes</tt></dd></dl>
+ <dl><dt><a name="-rainiest_days"><strong>rainiest_days</strong></a>(yearly_weather)</dt><dd><tt>Find&nbsp;the&nbsp;year&nbsp;with&nbsp;the&nbsp;largest&nbsp;number&nbsp;of&nbsp;rainy&nbsp;days&nbsp;in&nbsp;yearly_weather.<br>
+&nbsp;<br>
+Look&nbsp;through&nbsp;all&nbsp;the&nbsp;years&nbsp;in&nbsp;the&nbsp;yearly_weather&nbsp;dictionary&nbsp;and&nbsp;return&nbsp;the&nbsp;year&nbsp;with&nbsp;<br>
+the&nbsp;largest&nbsp;TOTAL_RAINY_DAYS<br>
+&nbsp;<br>
+args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;yearly_weather:&nbsp;consolidated&nbsp;dictionary,&nbsp;keys&nbsp;are&nbsp;years&nbsp;(int),&nbsp;values&nbsp;are&nbsp;lists&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[AVG_TMAX,&nbsp;AVG_TMIN,&nbsp;TOTAL_PRCP,&nbsp;TOTAL_RAINY_DAYS,&nbsp;TOTAL_DAYS]&nbsp;<br>
+&nbsp;<br>
+returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rainiest_year:&nbsp;the&nbsp;year&nbsp;with&nbsp;the&nbsp;largest&nbsp;number&nbsp;of&nbsp;rainy&nbsp;days</tt></dd></dl>
+ <dl><dt><a name="-table_header"><strong>table_header</strong></a>()</dt><dd><tt>Print&nbsp;the&nbsp;first&nbsp;row&nbsp;in&nbsp;a&nbsp;table&nbsp;&nbsp;(header&nbsp;row)</tt></dd></dl>
+ <dl><dt><a name="-year_info"><strong>year_info</strong></a>(year, yearly_weather)</dt><dd><tt>Convert&nbsp;the&nbsp;year's&nbsp;weather&nbsp;information&nbsp;to&nbsp;a&nbsp;formatted&nbsp;string.<br>
+&nbsp;<br>
+Look&nbsp;for&nbsp;the&nbsp;weather&nbsp;information&nbsp;of&nbsp;`year`&nbsp;in&nbsp;the&nbsp;`yearly_weather`&nbsp;dictionary.<br>
+If&nbsp;it&nbsp;exists,&nbsp;convert&nbsp;the&nbsp;information&nbsp;list&nbsp;into&nbsp;a&nbsp;formatted&nbsp;string:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YEAR&nbsp;|&nbsp;AVG_TMAX&nbsp;|&nbsp;AVG_TMIN&nbsp;|&nbsp;TOTAL_PRCP&nbsp;|&nbsp;TOTAL_RAINY_DAYS&nbsp;|&nbsp;TOTAL_DAYS<br>
+If&nbsp;it&nbsp;does&nbsp;not&nbsp;exist,&nbsp;the&nbsp;formatted&nbsp;string&nbsp;should&nbsp;be:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N/A&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;N/A&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;N/A&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N/A&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N/A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;N/A&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;year:&nbsp;int&nbsp;value&nbsp;to&nbsp;look&nbsp;for&nbsp;in&nbsp;the&nbsp;yearly_weather&nbsp;dictionary<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;yearly_weather:&nbsp;consolidated&nbsp;dictionary,&nbsp;keys&nbsp;are&nbsp;years&nbsp;(int),&nbsp;values&nbsp;are&nbsp;lists&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[AVG_TMAX,&nbsp;AVG_TMIN,&nbsp;TOTAL_PRCP,&nbsp;TOTAL_RAINY_DAYS,&nbsp;TOTAL_DAYS]&nbsp;<br>
+&nbsp;<br>
+returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;formatted_string:&nbsp;containing&nbsp;the&nbsp;year's&nbsp;weather&nbsp;information<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+examples:<br>
+Input&nbsp;yearly&nbsp;weather&nbsp;dictionary:<br>
+{2017:&nbsp;[45.666666666666664,&nbsp;34.333333333333336,&nbsp;2.28,&nbsp;9,&nbsp;15]}<br>
+&nbsp;<br>
+Output&nbsp;formatted&nbsp;string:<br>
+==&nbsp;<a href="#-year_info">year_info</a>(2017,&nbsp;yearly_weather)&nbsp;==&nbsp;(contained&nbsp;in&nbsp;the&nbsp;dictionary)<br>
+'&nbsp;2017&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;45.67&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;34.33&nbsp;|&nbsp;&nbsp;&nbsp;2.28"&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15&nbsp;'<br>
+&nbsp;<br>
+==&nbsp;<a href="#-year_info">year_info</a>(2055,&nbsp;yearly_weather)&nbsp;==&nbsp;(not&nbsp;contained&nbsp;in&nbsp;the&nbsp;dictionary)<br>
+'&nbsp;N/A&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N/A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N/A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;N/A&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N/A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N/A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'</tt></dd></dl>
+</td></tr></table>
+</body></html>
